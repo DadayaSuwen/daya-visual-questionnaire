@@ -46,10 +46,12 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.3",
     "@commitlint/config-conventional": "^17.6.3",
+    "classnames": "^2.3.2",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.3",
-    "prettier": "^2.8.8"
+    "prettier": "^2.8.8",
+    "sass": "^1.62.1"
   },
   "script": {
     "prepare": "husky install"
