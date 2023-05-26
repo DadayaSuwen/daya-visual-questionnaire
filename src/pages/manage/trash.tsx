@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Tarsh = () => {
+const Trash = () => {
   return <div>Tarsh</div>
 }
-export default Tarsh
+export default Trash

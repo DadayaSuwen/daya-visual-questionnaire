@@ -1,13 +1,9 @@
 import React from 'react'
-import ListPage from './pages/manage/list-page'
+import router from './pages/router'
+import { RouterProvider } from 'react-router-dom'
 
 function App() {
-  return (
-    <div className='App'>
-      <h1>问卷列表</h1>
-      <ListPage />
-    </div>
-  )
+  return <RouterProvider router={router}></RouterProvider>
 }
 
 export default App
