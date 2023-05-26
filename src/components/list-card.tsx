@@ -17,7 +17,9 @@ export default function ListCard(props: ListCardProps) {
     <div className='card'>
       <div className='header-top'>
         <div className='left'>
-          <span>{title}</span>
+          <span>
+            <a href='#'>{title}</a>
+          </span>
         </div>
         <div className='right'>
           <span

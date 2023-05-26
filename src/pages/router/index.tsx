@@ -1,6 +1,5 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
-
 import MainLayout from '../layout/min-layout'
 import ManageLayout from '../layout/manage-layout'
 import QuestionLayout from '../layout/question-layout'
