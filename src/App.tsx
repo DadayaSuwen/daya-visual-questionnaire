@@ -1,5 +1,5 @@
 import React from 'react'
-import ListPage from './pages/list-page'
+import ListPage from './pages/manage/list-page'
 
 function App() {
   return (

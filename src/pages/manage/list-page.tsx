@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ListCard from '../components/list-card'
+import ListCard from '../../components/list-card'
 import './list-page.scss'
 const ListPage = () => {
   const [data] = useState([
