@@ -46,20 +46,20 @@ const router = createBrowserRouter([
             element: <Trash />
           }
         ]
+      }
+    ]
+  },
+  {
+    path: '/question',
+    element: <QuestionLayout />,
+    children: [
+      {
+        path: 'edit/:id',
+        element: <Edit />
       },
       {
-        path: 'question',
-        element: <QuestionLayout />,
-        children: [
-          {
-            path: 'edit',
-            element: <Edit />
-          },
-          {
-            path: 'star',
-            element: <Star />
-          }
-        ]
+        path: 'star/:id',
+        element: <Star />
       }
     ]
   },
