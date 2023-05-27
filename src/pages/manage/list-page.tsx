@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import ListCard from '../../components/list'
 import { useTitle } from 'ahooks'
-import './list-page.scss'
+import './common.scss'
 const ListPage = () => {
-  useTitle('666')
+  useTitle('问卷列表页')
   const [data] = useState([
     {
       id: 1,
