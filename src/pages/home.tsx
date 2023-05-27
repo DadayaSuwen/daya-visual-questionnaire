@@ -1,13 +1,21 @@
 import React from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { Typography, Button } from 'antd'
+import { MANAGE_LIST_PATH } from './router'
+import './home.scss'
+const { Title, Paragraph } = Typography
 const Home = () => {
   const navigate = useNavigate()
   return (
-    <div>
-      <p>Home</p>
-      <div>
-        <button onClick={() => navigate('/login')}>登录</button>
-        <Link to='/register'>注册</Link>
+    <div className='home-container'>
+      <div className='info'>
+        <Title>问卷系统 | 在线编辑</Title>
+        <Paragraph>已累计填写 共计3901份问卷</Paragraph>
+        <div>
+          <Button type='primary' onClick={() => navigate(MANAGE_LIST_PATH)}>
+            开始使用
+          </Button>
+        </div>
       </div>
     </div>
   )

@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
-import ListCard from '../../components/list-card'
+import ListCard from '../../components/list'
+import { useTitle } from 'ahooks'
 import './list-page.scss'
 const ListPage = () => {
+  useTitle('666')
   const [data] = useState([
     {
       id: 1,
       title: 'name1',
       isPublish: true,
-      isStar: false,
+      isStar: true,
       count: 0,
       createdDate: '2021-09-01',
       createdBy: 'John Doe'
@@ -38,20 +40,22 @@ const ListPage = () => {
         <div className='right'>（搜索）</div>
       </div>
       <div className='main'>
-        {data.map(item => {
-          const { id, title, isPublish, isStar, count, createdDate, createdBy } = item
-          return (
-            <ListCard
-              key={id}
-              title={title}
-              isPublish={isPublish}
-              count={count}
-              isStar={isStar}
-              createdDate={createdDate}
-              createdBy={createdBy}
-            />
-          )
-        })}
+        {/* 问卷列表 */}
+        {data.length > 0 &&
+          data.map(item => {
+            const { id, title, isPublish, isStar, count, createdDate, createdBy } = item
+            return (
+              <ListCard
+                key={id}
+                title={title}
+                isPublish={isPublish}
+                count={count}
+                isStar={isStar}
+                createdDate={createdDate}
+                createdBy={createdBy}
+              />
+            )
+          })}
       </div>
       <div className='footer'>分页</div>
     </div>

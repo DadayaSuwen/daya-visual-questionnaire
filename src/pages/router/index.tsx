@@ -1,6 +1,6 @@
 import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
-import MainLayout from '../layout/min-layout'
+import MainLayout from '../layout/main-layout'
 import ManageLayout from '../layout/manage-layout'
 import QuestionLayout from '../layout/question-layout'
 import Home from '../home'
@@ -10,23 +10,28 @@ import Page404 from '../404'
 import ListPage from '../manage/list-page'
 import Trash from '../manage/trash'
 import Edit from '../question/edit'
-import Star from '../question/star'
+import Star from '../manage/star'
+import Stat from '../question/stat'
 
+export const HOME_PATH = '/'
+export const LOGIN_PATH = '/login'
+export const REGISTER_PATH = '/register'
+export const MANAGE_LIST_PATH = '/manage/list'
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: HOME_PATH,
     element: <MainLayout />,
     children: [
       {
-        path: '/',
+        path: HOME_PATH,
         element: <Home />
       },
       {
-        path: '/login',
+        path: LOGIN_PATH,
         element: <Login />
       },
       {
-        path: '/register',
+        path: REGISTER_PATH,
         element: <Register />
       },
       {
@@ -58,8 +63,8 @@ const router = createBrowserRouter([
         element: <Edit />
       },
       {
-        path: 'star/:id',
-        element: <Star />
+        path: 'stat/:id',
+        element: <Stat />
       }
     ]
   },

@@ -1,0 +1,16 @@
+.layout-herder {
+  padding: 0 24px;
+  .left {
+    float: left;
+  }
+  .right {
+    float: right;
+  }
+}
+.layout-container {
+  min-height: calc(100vh - 64px - 71px);
+}
+.layout-footer {
+  text-align: center;
+  background: #001529;
+}
