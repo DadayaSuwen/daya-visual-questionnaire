@@ -1,7 +1,7 @@
 import React from 'react'
 import cl from 'classnames'
-import { Button, Space } from 'antd'
-import { useNavigate } from 'react-router-dom'
+import { Button, Space, Tag, Divider, Popconfirm, Modal, message } from 'antd'
+import { useNavigate, Link } from 'react-router-dom'
 import './index.scss'
 import {
   EditOutlined,
@@ -9,10 +9,12 @@ import {
   StarOutlined,
   StarFilled,
   CopyOutlined,
-  DeleteOutlined
+  DeleteOutlined,
+  ExceptionOutlined
 } from '@ant-design/icons'
 
-interface ListCardProps {
+export interface ListCardProps {
+  id: number
   key: number
   title: string
   isPublish: boolean
@@ -23,37 +25,44 @@ interface ListCardProps {
 }
 
 export default function ListCard(props: ListCardProps) {
-  const { title, isPublish, count, isStar, createdDate, key } = props
+  const { title, isPublish, count, isStar, createdDate, id } = props
+  const { confirm } = Modal
   const navigate = useNavigate()
   return (
     <div className='card'>
       <div className='header-top'>
         <div className='left'>
-          <span>
-            <a href='#'>{title}</a>
-          </span>
+          <Link to={isPublish ? `/question/stat/${id}` : `/question/edit/${id}`}>
+            <Space>
+              {isStar && <StarOutlined className='is-star' />}
+              {title}
+            </Space>
+          </Link>
         </div>
         <div className='right'>
-          <span
-            className={cl({
-              'active': isPublish
-            })}
-          >
-            未发布
-          </span>
-          <span>答卷:{count}</span>
-          <span>{createdDate}</span>
+          <Space>
+            <span
+              className={cl({
+                'active': isPublish
+              })}
+            >
+              {isPublish ? <Tag color='processing'>已发布</Tag> : <Tag>未发布 </Tag>}
+            </span>
+            <span>答卷:{count}</span>
+            <span>{createdDate}</span>
+          </Space>
         </div>
       </div>
+      <Divider />
       <div className='header-bottom'>
         <div className='left'>
           <Space>
-            <Button onClick={() => navigate(`/question/edit/${key}`)} icon={<EditOutlined />}>
+            <Button onClick={() => navigate(`/question/edit/${id}`)} icon={<EditOutlined />}>
               编辑问卷
             </Button>
             <Button
               disabled={!isPublish}
-              onClick={() => navigate(`/question/Stat/${key}`)}
+              onClick={() => navigate(`/question/Stat/${id}`)}
               icon={<LineChartOutlined />}
             >
               数据统计
@@ -62,7 +71,6 @@ export default function ListCard(props: ListCardProps) {
         </div>
         <div className='right'>
           <Space>
-            {' '}
             <Button
               icon={isStar ? <StarFilled /> : <StarOutlined />}
               className={cl({
@@ -71,8 +79,29 @@ export default function ListCard(props: ListCardProps) {
             >
               {isStar ? '取消标星' : '标星'}
             </Button>
-            <Button icon={<CopyOutlined />}>复制</Button>
-            <Button icon={<DeleteOutlined />}>删除</Button>
+            <Popconfirm
+              onConfirm={() => {
+                message.success('成功复制')
+              }}
+              title='确定复制改问卷吗'
+              okText='确定'
+              cancelText='取消'
+            >
+              <Button icon={<CopyOutlined />}>复制</Button>
+            </Popconfirm>
+
+            <Button
+              icon={<DeleteOutlined />}
+              onClick={() => {
+                confirm({
+                  title: '是否删除',
+                  icon: <ExceptionOutlined />,
+                  onOk: () => message.error('成功删除')
+                })
+              }}
+            >
+              删除
+            </Button>
           </Space>
         </div>
       </div>

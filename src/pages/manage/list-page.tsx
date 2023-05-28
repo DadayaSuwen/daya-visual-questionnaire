@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import ListCard from '../../components/list'
 import { useTitle } from 'ahooks'
+import { Typography } from 'antd'
 import './common.scss'
+const { Title } = Typography
 const ListPage = () => {
   useTitle('问卷列表页')
   const [data] = useState([
@@ -18,7 +20,7 @@ const ListPage = () => {
       id: 2,
       title: 'name2',
       isPublish: false,
-      isStar: false,
+      isStar: true,
       count: 0,
       createdDate: '2021-09-02',
       createdBy: 'Jane Smith'
@@ -36,7 +38,9 @@ const ListPage = () => {
   return (
     <div className='list'>
       <div className='header'>
-        <div className='left'>我的问卷</div>
+        <div className='left'>
+          <Title level={3}>我的问卷</Title>
+        </div>
         <div className='right'>（搜索）</div>
       </div>
       <div className='main'>
@@ -46,6 +50,7 @@ const ListPage = () => {
             const { id, title, isPublish, isStar, count, createdDate, createdBy } = item
             return (
               <ListCard
+                id={id}
                 key={id}
                 title={title}
                 isPublish={isPublish}
@@ -57,7 +62,7 @@ const ListPage = () => {
             )
           })}
       </div>
-      <div className='footer'>分页</div>
+      <div className='footer'>下滑加载更多</div>
     </div>
   )
 }
