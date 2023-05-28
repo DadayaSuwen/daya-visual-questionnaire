@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import ListCard from '../../components/list'
 import { useTitle } from 'ahooks'
 import { Typography, Empty } from 'antd'
+import Search from '../../components/search'
 import './common.scss'
 const { Title } = Typography
 const Star = () => {
@@ -32,7 +33,9 @@ const Star = () => {
         <div className='left'>
           <Title level={3}>星标问卷</Title>
         </div>
-        <div className='right'>（搜索）</div>
+        <div className='right'>
+          <Search />
+        </div>
       </div>
       <div className='main'>
         {data.length === 0 && <Empty description='暂无数据' />}

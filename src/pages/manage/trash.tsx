@@ -3,6 +3,7 @@ import { useTitle } from 'ahooks'
 import { Typography, Empty, Table, Tag, Button, Space, Modal } from 'antd'
 // import type { ListCardProps } from '../../components/list'
 import { ExceptionOutlined } from '@ant-design/icons'
+import Search from '../../components/search'
 import './common.scss'
 const { Title } = Typography
 
@@ -99,7 +100,9 @@ const Trash = () => {
         <div className='left'>
           <Title level={3}>回收站</Title>
         </div>
-        <div className='right'>（搜索）</div>
+        <div className='right'>
+          <Search />
+        </div>
       </div>
       <div className='main'>
         {data.length === 0 && <Empty description='暂无数据' />}
