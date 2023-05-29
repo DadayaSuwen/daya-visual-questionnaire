@@ -5,9 +5,14 @@ import { Link } from 'react-router-dom'
 import { LOGIN_PATH } from '../pages/router/index'
 import './register.scss'
 
+interface IRegister {
+  registerUsername: string
+  registerPassword: string
+}
+
 const { Title } = Typography
 const Register = () => {
-  const onFinish = (values: any) => {
+  const onFinish = (values: IRegister) => {
     console.log(values)
   }
   return (

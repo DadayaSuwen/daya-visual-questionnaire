@@ -5,6 +5,12 @@ import { Link } from 'react-router-dom'
 import { REGISTER_PATH } from '../pages/router/index'
 import './login.scss'
 
+interface ILogin {
+  loginUserName: string
+  loginPassWord: string
+  remenber: boolean
+}
+
 const { Title } = Typography
 const USERNAME_KEY = 'loginUserName'
 const PASSWORD_KEY = 'loginPassWord'
@@ -26,7 +32,7 @@ const getStorage = () => {
 }
 
 const Login = () => {
-  const onFinish = (values: any) => {
+  const onFinish = (values: ILogin) => {
     console.log(values)
     const { loginUserName, loginPassWord, remenber } = values
 
