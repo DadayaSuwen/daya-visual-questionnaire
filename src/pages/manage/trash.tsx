@@ -38,7 +38,7 @@ const Trash = () => {
       title: '是否发布',
       dataIndex: 'isPublish',
       render: (isPublish: boolean) =>
-        isPublish ? <Tag color='processing'>已发布</Tag> : <Tag>未发布 </Tag>
+        isPublish ? <Tag color='green'>已发布</Tag> : <Tag color='red'>未发布 </Tag>
     },
     {
       title: '答卷数量',

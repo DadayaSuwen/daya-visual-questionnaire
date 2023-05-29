@@ -46,7 +46,7 @@ export default function ListCard(props: ListCardProps) {
                 'active': isPublish
               })}
             >
-              {isPublish ? <Tag color='processing'>已发布</Tag> : <Tag>未发布 </Tag>}
+              {isPublish ? <Tag color='green'>已发布</Tag> : <Tag color='red'>未发布 </Tag>}
             </span>
             <span>答卷:{count}</span>
             <span>{createdDate}</span>
