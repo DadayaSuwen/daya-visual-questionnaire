@@ -32,6 +32,12 @@
  - | 优化package.json | [5ac45b1](https://github.com/dalang857/suwendemo/commit/5ac45b1)
 
 
+### chore
+范围|描述|commitId
+--|--|--
+ - | 修改项目的提交构建 | [97e727b](https://github.com/dalang857/suwendemo/commit/97e727b)
+
+
 范围|描述|commitId
 --|--|--
  - | Update README.md | [268add6](https://github.com/dalang857/suwendemo/commit/268add6)
