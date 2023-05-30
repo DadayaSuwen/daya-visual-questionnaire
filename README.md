@@ -1,14 +1,22 @@
-# Create React App 慕课问卷项目
+# 使用Create react app 构建 
+
+# 问卷调查项目
 
 **使用的技术栈 React + Antd + Router + Ahooks**
 
 ### 安装项目依赖
 
-`npm install`
+`yarn`
 
 ### 启动项目
 
-`npm start`
+`yarn start`
+
+### 启动mock.js
+
+`cd /server`
+
+`yarn run dev`
 
 ### 🌟 新功能
 
