@@ -14,8 +14,7 @@ import {
 } from '@ant-design/icons'
 
 export interface ListCardProps {
-  id: number
-  key: number
+  id: string
   title: string
   isPublish: boolean
   isStar: boolean

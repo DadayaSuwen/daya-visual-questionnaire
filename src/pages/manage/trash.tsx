@@ -1,34 +1,17 @@
 import React, { useState } from 'react'
 import { useTitle } from 'ahooks'
-import { Typography, Empty, Table, Tag, Button, Space, Modal } from 'antd'
+import { Typography, Empty, Table, Tag, Button, Space, Modal, Spin } from 'antd'
 // import type { ListCardProps } from '../../components/list'
 import { ExceptionOutlined } from '@ant-design/icons'
 import Search from '../../components/search'
+import useLoadSearch from '../../hooks/useloadsearch'
 import './common.scss'
 const { Title } = Typography
 
 const Trash = () => {
   useTitle('回收站')
-  const [data] = useState([
-    {
-      id: 1,
-      title: 'name1',
-      isPublish: true,
-      isStar: true,
-      count: 0,
-      createdDate: '2021-09-01',
-      createdBy: 'John Doe'
-    },
-    {
-      id: 2,
-      title: 'name2',
-      isPublish: false,
-      isStar: true,
-      count: 0,
-      createdDate: '2021-09-02',
-      createdBy: 'Jane Smith'
-    }
-  ])
+  const { data, loading } = useLoadSearch({ isDeleted: true })
+  const { list = [] } = data || {}
   const tableColumns = [
     {
       title: '问卷标题',
@@ -86,7 +69,7 @@ const Trash = () => {
             // setSelectAny(selectedRows as ListCardProps[])
           }
         }}
-        dataSource={data}
+        dataSource={list}
         columns={tableColumns}
         pagination={false}
         rowKey={item => item.id}
@@ -105,8 +88,14 @@ const Trash = () => {
         </div>
       </div>
       <div className='main'>
-        {data.length === 0 && <Empty description='暂无数据' />}
-        {data.length > 0 && TableElement}
+        {loading && (
+          <div className='spin'>
+            <Spin />
+          </div>
+        )}
+        {!loading && list.length === 0 && <Empty description='暂无数据' />}
+        {list.length === 0 && <Empty description='暂无数据' />}
+        {list.length > 0 && TableElement}
       </div>
       <div className='footer'>分页</div>
     </div>

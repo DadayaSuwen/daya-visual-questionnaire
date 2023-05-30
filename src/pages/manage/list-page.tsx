@@ -1,16 +1,23 @@
 import React from 'react'
 import ListCard from '../../components/list'
-import { useTitle, useRequest } from 'ahooks'
+import { useTitle } from 'ahooks'
 import { Typography, Spin } from 'antd'
 import Search from '../../components/search'
 import './common.scss'
-import { getQuestionListData } from '../../services/question'
-
+import useLoadSearch from '../../hooks/useloadsearch'
 const { Title } = Typography
-
+interface Question {
+  id: string;
+  title: string;
+  isPublish: boolean;
+  isStar: boolean;
+  count: number;
+  createdDate: string;
+  createdBy: string;
+}
 const ListPage = () => {
   useTitle('我的问卷')
-  const { data, loading } = useRequest(getQuestionListData)
+  const { data, loading } = useLoadSearch()
   const { list = [] } = data || {}
   return (
     <div className='list'>
@@ -31,19 +38,20 @@ const ListPage = () => {
         {/* 问卷列表 */}
         {!loading &&
           list.length > 0 &&
-          list.map((item: any) => {
+          list.map((item: Question) => {
             const { id, title, isPublish, isStar, count, createdDate, createdBy } = item
             return (
-              <ListCard
-                id={id}
-                key={id}
-                title={title}
-                isPublish={isPublish}
-                count={count}
-                isStar={isStar}
-                createdDate={createdDate}
-                createdBy={createdBy}
-              />
+              <div key={id}>
+                <ListCard
+                  id={id}
+                  title={title}
+                  isPublish={isPublish}
+                  count={count}
+                  isStar={isStar}
+                  createdDate={createdDate}
+                  createdBy={createdBy}
+                />
+              </div>
             )
           })}
       </div>

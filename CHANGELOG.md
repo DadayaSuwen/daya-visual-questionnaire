@@ -12,6 +12,7 @@
  - | 完成搜索功能的地址切换 | [fec7a3e](https://github.com/dalang857/suwendemo/commit/fec7a3e)
  - | 完成所有列表页的界面 | [801199b](https://github.com/dalang857/suwendemo/commit/801199b)
  - | 完成页面布局和基础的搭建 | [e074803](https://github.com/dalang857/suwendemo/commit/e074803)
+ - | 完善列表页面的请求 | [0b7a3b2](https://github.com/dalang857/suwendemo/commit/0b7a3b2)
  - | 完善页面 使用antd构造 | [b6d6cf5](https://github.com/dalang857/suwendemo/commit/b6d6cf5)
 
 

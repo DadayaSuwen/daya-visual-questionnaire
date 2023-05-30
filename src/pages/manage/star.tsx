@@ -1,32 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ListCard from '../../components/list'
 import { useTitle } from 'ahooks'
-import { Typography, Empty } from 'antd'
+import { Typography, Empty, Spin } from 'antd'
 import Search from '../../components/search'
+import useLoadSearch from '../../hooks/useloadsearch'
 import './common.scss'
 const { Title } = Typography
 const Star = () => {
   useTitle('我的收藏')
-  const [data] = useState([
-    {
-      id: 1,
-      title: 'name1',
-      isPublish: true,
-      isStar: true,
-      count: 0,
-      createdDate: '2021-09-01',
-      createdBy: 'John Doe'
-    },
-    {
-      id: 2,
-      title: 'name2',
-      isPublish: false,
-      isStar: true,
-      count: 0,
-      createdDate: '2021-09-02',
-      createdBy: 'Jane Smith'
-    }
-  ])
+  const { data, loading } = useLoadSearch({ isStar: true })
+  const { list = [] } = data || {}
   return (
     <div className='list'>
       <div className='header'>
@@ -38,9 +21,14 @@ const Star = () => {
         </div>
       </div>
       <div className='main'>
-        {data.length === 0 && <Empty description='暂无数据' />}
-        {data.length > 0 &&
-          data.map(item => {
+        {loading && (
+          <div className='spin'>
+            <Spin />
+          </div>
+        )}
+        {!loading && list.length === 0 && <Empty description='暂无数据' />}
+        {list.length > 0 &&
+          list.map((item: any) => {
             const { id, title, isPublish, isStar, count, createdDate, createdBy } = item
             return (
               <ListCard

@@ -32,11 +32,14 @@ module.exports = [
     //获取列表
     url: '/api/question',
     method: 'get',
-    response() {
+    response(ctx) {
+      const { url = '' } = ctx
+      const isDeleted = url.indexOf('isDeleted=true') >= 0
+      const isStar = url.indexOf('isStar=true') >= 0
       return {
         errno: 0,
         data: {
-          list: getQuestionList(),
+          list: getQuestionList({ isStar, isDeleted }),
           total: 100
         }
       }

@@ -1,5 +1,11 @@
 import axios, { ResDataType } from './ajax'
 
+type searchOption = {
+  searchValue: string
+  isDeleted: boolean
+  isStar: boolean
+}
+
 // 获取单个问卷
 export async function getQuestionList(id: string): Promise<ResDataType> {
   const url = `/api/question/${id}`
@@ -13,8 +19,10 @@ export async function createQuestionServer(): Promise<ResDataType> {
   return data
 }
 
-export async function getQuestionListData(): Promise<ResDataType> {
+export async function getQuestionListData(
+  search: Partial<searchOption> = {}
+): Promise<ResDataType> {
   const url = '/api/question'
-  const data = (await axios.get(url)) as ResDataType
+  const data = (await axios.get(url, { params: search })) as ResDataType
   return data
 }
