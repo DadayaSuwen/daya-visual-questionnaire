@@ -15,6 +15,12 @@
  - | 完善页面 使用antd构造 | [b6d6cf5](https://github.com/dalang857/suwendemo/commit/b6d6cf5)
 
 
+### 🎨 代码样式
+范围|描述|commitId
+--|--|--
+ - | 项目启动类型 | [2c41438](https://github.com/dalang857/suwendemo/commit/2c41438)
+
+
 ### 🐛 Bug 修复
 范围|描述|commitId
 --|--|--
@@ -46,6 +52,7 @@
 
 范围|描述|commitId
 --|--|--
+ - | Update README.md | [2d75edd](https://github.com/dalang857/suwendemo/commit/2d75edd)
  - | Update README.md | [268add6](https://github.com/dalang857/suwendemo/commit/268add6)
  - | Update README.md | [ef2a0fc](https://github.com/dalang857/suwendemo/commit/ef2a0fc)
  - | Update README.md | [ca2e2f1](https://github.com/dalang857/suwendemo/commit/ca2e2f1)

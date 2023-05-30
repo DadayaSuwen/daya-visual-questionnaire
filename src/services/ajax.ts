@@ -6,7 +6,6 @@ const instance = axios.create({
 
 instance.interceptors.response.use(res => {
   const resData = (res.data || {}) as ResType
-  console.log(resData)
   const { errno, data, msg } = resData
   if (errno !== 0) {
     if (msg) console.error(msg)

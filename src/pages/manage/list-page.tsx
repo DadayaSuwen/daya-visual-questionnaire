@@ -1,41 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ListCard from '../../components/list'
-import { useTitle } from 'ahooks'
-import { Typography } from 'antd'
+import { useTitle, useRequest } from 'ahooks'
+import { Typography, Spin } from 'antd'
 import Search from '../../components/search'
 import './common.scss'
+import { getQuestionListData } from '../../services/question'
+
 const { Title } = Typography
+
 const ListPage = () => {
-  useTitle('问卷列表页')
-  const [data] = useState([
-    {
-      id: 1,
-      title: 'name1',
-      isPublish: true,
-      isStar: true,
-      count: 0,
-      createdDate: '2021-09-01',
-      createdBy: 'John Doe'
-    },
-    {
-      id: 2,
-      title: 'name2',
-      isPublish: false,
-      isStar: true,
-      count: 0,
-      createdDate: '2021-09-02',
-      createdBy: 'Jane Smith'
-    },
-    {
-      id: 3,
-      title: 'name3',
-      isPublish: true,
-      isStar: false,
-      count: 0,
-      createdDate: '2021-09-03',
-      createdBy: 'Bob Johnson'
-    }
-  ])
+  useTitle('我的问卷')
+  const { data, loading } = useRequest(getQuestionListData)
+  const { list = [] } = data || {}
   return (
     <div className='list'>
       <div className='header'>
@@ -47,9 +23,15 @@ const ListPage = () => {
         </div>
       </div>
       <div className='main'>
+        {loading && (
+          <div className='spin'>
+            <Spin />
+          </div>
+        )}
         {/* 问卷列表 */}
-        {data.length > 0 &&
-          data.map(item => {
+        {!loading &&
+          list.length > 0 &&
+          list.map((item: any) => {
             const { id, title, isPublish, isStar, count, createdDate, createdBy } = item
             return (
               <ListCard

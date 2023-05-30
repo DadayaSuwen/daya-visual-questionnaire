@@ -12,3 +12,9 @@ export async function createQuestionServer(): Promise<ResDataType> {
   const data = (await axios.post(url)) as ResDataType
   return data
 }
+
+export async function getQuestionListData(): Promise<ResDataType> {
+  const url = '/api/question'
+  const data = (await axios.get(url)) as ResDataType
+  return data
+}
