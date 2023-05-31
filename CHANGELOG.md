@@ -1,4 +1,4 @@
-# 0.1.0 (2023-05-30)
+# 0.1.0 (2023-05-31)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -48,6 +48,7 @@
 ### chore
 范围|描述|commitId
 --|--|--
+ - | 联调mock数据 | [1bca3ec](https://github.com/dalang857/suwendemo/commit/1bca3ec)
  - | 修改项目的提交构建 | [97e727b](https://github.com/dalang857/suwendemo/commit/97e727b)
 
 

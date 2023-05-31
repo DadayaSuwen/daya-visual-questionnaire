@@ -4,12 +4,15 @@ import { useTitle } from 'ahooks'
 import { Typography, Empty, Spin } from 'antd'
 import Search from '../../components/search'
 import useLoadSearch from '../../hooks/useloadsearch'
+import ListPages from '../../components/pagination'
 import './common.scss'
+
 const { Title } = Typography
 const Star = () => {
   useTitle('我的收藏')
   const { data, loading } = useLoadSearch({ isStar: true })
-  const { list = [] } = data || {}
+  const { list = [], total } = data || {}
+
   return (
     <div className='list'>
       <div className='header'>
@@ -44,7 +47,9 @@ const Star = () => {
             )
           })}
       </div>
-      <div className='footer'>分页</div>
+      <div className='footer'>
+        <ListPages total={total} />
+      </div>
     </div>
   )
 }

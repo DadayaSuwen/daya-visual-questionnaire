@@ -1,7 +1,7 @@
 import { useRequest } from 'ahooks'
 import { useSearchParams } from 'react-router-dom'
 import { getQuestionListData } from '../services/question'
-import { SEARCH_VALUE } from '../components/type'
+import { SEARCH_VALUE, PAGE_VALUE, PAGE_SIZE_VALUE, PAGE_SIZE } from '../components/type'
 
 type SearchOption = {
   isStar: boolean
@@ -13,7 +13,9 @@ const useLoadSearch = (option: Partial<SearchOption> = {}) => {
   const { data, loading, error } = useRequest(
     async () => {
       const searchValue = SearchParams.get(SEARCH_VALUE) || ''
-      const data = await getQuestionListData({ searchValue, isStar, isDeleted })
+      const page = parseInt(SearchParams.get(PAGE_VALUE) || '') || 1
+      const pageSize = parseInt(SearchParams.get(PAGE_SIZE_VALUE) || '') || PAGE_SIZE
+      const data = await getQuestionListData({ searchValue, isStar, isDeleted, page, pageSize })
       return data
     },
     {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTitle } from 'ahooks'
 import { Typography, Empty, Table, Tag, Button, Space, Modal, Spin } from 'antd'
-// import type { ListCardProps } from '../../components/list'
+import ListPages from '../../components/pagination'
 import { ExceptionOutlined } from '@ant-design/icons'
 import Search from '../../components/search'
 import useLoadSearch from '../../hooks/useloadsearch'
@@ -11,7 +11,7 @@ const { Title } = Typography
 const Trash = () => {
   useTitle('回收站')
   const { data, loading } = useLoadSearch({ isDeleted: true })
-  const { list = [] } = data || {}
+  const { list = [], total } = data || {}
   const tableColumns = [
     {
       title: '问卷标题',
@@ -94,10 +94,11 @@ const Trash = () => {
           </div>
         )}
         {!loading && list.length === 0 && <Empty description='暂无数据' />}
-        {list.length === 0 && <Empty description='暂无数据' />}
         {list.length > 0 && TableElement}
       </div>
-      <div className='footer'>分页</div>
+      <div className='footer'>
+        <ListPages total={total} />
+      </div>
     </div>
   )
 }

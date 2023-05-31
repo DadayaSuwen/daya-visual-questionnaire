@@ -35,7 +35,6 @@ const Search = () => {
   useEffect(() => {
     const urlVal = searchParams.get(SEARCH_VALUE) || ''
     setSearchValue(urlVal)
-    console.log('urlVal', urlVal)
   }, [searchParams])
   return (
     <>

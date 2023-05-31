@@ -4,6 +4,8 @@ type searchOption = {
   searchValue: string
   isDeleted: boolean
   isStar: boolean
+  page: number
+  pageSize: number
 }
 
 // 获取单个问卷
