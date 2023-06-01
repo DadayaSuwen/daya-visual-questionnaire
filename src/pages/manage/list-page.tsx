@@ -68,14 +68,14 @@ const ListPage = () => {
       const domRef = footerDom.getBoundingClientRect()
       if (domRef === null) return
       const { bottom } = domRef
-      if (bottom < window.innerHeight * 0.9 && bottom > 0) {
+      if (bottom < window.innerHeight && bottom > 0) {
         load()
         setStarted(true)
         message.success('加载成功')
       }
     },
     {
-      wait: 800
+      wait: 500
     }
   )
 
@@ -90,7 +90,7 @@ const ListPage = () => {
       return <Empty description='暂无数据' />
     }
     return <Spin indicator={antIcon} />
-  }, [loading])
+  }, [loading, havaMore, started, total])
 
   useEffect(() => {
     setList([])

@@ -37,13 +37,42 @@ module.exports = [
       const isDeleted = url.indexOf('isDeleted=true') >= 0
       const isStar = url.indexOf('isStar=true') >= 0
       const pageSize = parseInt(query.pageSize || 3)
-      const page = parseInt(query.page || 1)
       return {
         errno: 0,
         data: {
           list: getQuestionList({ len: pageSize, isStar, isDeleted }),
           total: 100
         }
+      }
+    }
+  },
+  {
+    url: '/api/question/:id',
+    method: 'patch',
+    response() {
+      return {
+        errno: 0
+      }
+    }
+  },
+  {
+    url: '/api/question/duplicate/:id',
+    method: 'post',
+    response() {
+      return {
+        errno: 0,
+        data: {
+          id: Random.id()
+        }
+      }
+    }
+  },
+  {
+    url: '/api/question',
+    method: 'delete',
+    response() {
+      return {
+        errno: 0
       }
     }
   }

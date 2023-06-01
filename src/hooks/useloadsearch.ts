@@ -10,7 +10,7 @@ type SearchOption = {
 const useLoadSearch = (option: Partial<SearchOption> = {}) => {
   const { isStar = false, isDeleted = false } = option
   const [SearchParams] = useSearchParams()
-  const { data, loading, error } = useRequest(
+  const { data, loading, error, refresh } = useRequest(
     async () => {
       const searchValue = SearchParams.get(SEARCH_VALUE) || ''
       const page = parseInt(SearchParams.get(PAGE_VALUE) || '') || 1
@@ -25,7 +25,8 @@ const useLoadSearch = (option: Partial<SearchOption> = {}) => {
   return {
     data,
     loading,
-    error
+    error,
+    refresh
   }
 }
 

@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import cl from 'classnames'
 import { Button, Space, Tag, Divider, Popconfirm, Modal, message } from 'antd'
 import { useNavigate, Link } from 'react-router-dom'
 import './index.scss'
+import { updateQuestionServer } from '../../services/question'
+import { duplicateQuestionServer } from '../../services/question'
+import { useRequest } from 'ahooks'
 import {
   EditOutlined,
   LineChartOutlined,
@@ -27,6 +30,45 @@ export default function ListCard(props: ListCardProps) {
   const { title, isPublish, count, isStar, createdDate, id } = props
   const { confirm } = Modal
   const navigate = useNavigate()
+
+  const [isStarState, setIsStarState] = useState(isStar)
+  const { loading: chanageStarLoading, run: updateQuestion } = useRequest(async () => {
+    const data = await updateQuestionServer(id, { isStar: !isStarState })
+    return data
+  }, {
+    manual: true,
+    onSuccess() {
+      setIsStarState(!isStarState)
+      message.success('修改成功')
+    }
+  })
+
+  const { loading: duplicateLoading, run: duplicate } = useRequest(async () => await duplicateQuestionServer(id), {
+    manual: true,
+    onSuccess(result) {
+      message.success('复制成功')
+      navigate(`/question/edit/${result?.id}`)
+    }
+  })
+  const [deleteState, setDeleteState] = useState(false)
+  const { loading: deleteLoading, run: isDelete } = useRequest(async () => await updateQuestionServer(id, { isDelete: true }), {
+    manual: true,
+    onSuccess() {
+      message.success('删除成功')
+      setDeleteState(true)
+    }
+  })
+
+  const deleteList = () => {
+    confirm({
+      title: '是否删除',
+      icon: <ExceptionOutlined />,
+      onOk: () => isDelete()
+    })
+  }
+
+  if (deleteState) return null
+
   return (
     <div className='card'>
       <div className='header-top'>
@@ -71,33 +113,28 @@ export default function ListCard(props: ListCardProps) {
         <div className='right'>
           <Space>
             <Button
-              icon={isStar ? <StarFilled /> : <StarOutlined />}
-              className={cl({
-                'active': isStar
-              })}
+              icon={isStarState ? <StarFilled className={cl({
+                'active': isStarState
+              })} /> : <StarOutlined />}
+
+              onClick={updateQuestion}
+              disabled={chanageStarLoading}
             >
-              {isStar ? '取消标星' : '标星'}
+              {isStarState ? '取消标星' : '标星'}
             </Button>
             <Popconfirm
-              onConfirm={() => {
-                message.success('成功复制')
-              }}
+              onConfirm={duplicate}
               title='确定复制改问卷吗'
               okText='确定'
               cancelText='取消'
             >
-              <Button icon={<CopyOutlined />}>复制</Button>
+              <Button disabled={duplicateLoading} icon={<CopyOutlined />}>复制</Button>
             </Popconfirm>
 
             <Button
               icon={<DeleteOutlined />}
-              onClick={() => {
-                confirm({
-                  title: '是否删除',
-                  icon: <ExceptionOutlined />,
-                  onOk: () => message.error('成功删除')
-                })
-              }}
+              onClick={deleteList}
+              disabled={deleteLoading}
             >
               删除
             </Button>

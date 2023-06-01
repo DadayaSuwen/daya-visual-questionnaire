@@ -1,19 +1,23 @@
 import React, { useState } from 'react'
 import { useTitle } from 'ahooks'
-import { Typography, Empty, Table, Tag, Button, Space, Modal, Spin } from 'antd'
+import { Typography, Empty, Table, Tag, Button, Space, Modal, Spin, message } from 'antd'
 import ListPages from '../../components/pagination'
+import { useRequest } from 'ahooks'
 import { ExceptionOutlined, SyncOutlined } from '@ant-design/icons'
 import Search from '../../components/search'
-
+import { updateQuestionServer } from '../../services/question'
+import { deleteQuestionServer } from '../../services/question'
 import useLoadSearch from '../../hooks/useloadsearch'
 import './common.scss'
 const { Title } = Typography
 
 const Trash = () => {
   useTitle('回收站')
-  const { data, loading } = useLoadSearch({ isDeleted: true })
+  const { data, loading, refresh } = useLoadSearch({ isDeleted: true })
+  const [selectId, setSelectId] = useState<string[]>([])
   const { list = [], total } = data || {}
   const antIcon = <SyncOutlined spin />
+  const { confirm } = Modal
   const tableColumns = [
     {
       title: '问卷标题',
@@ -34,30 +38,65 @@ const Trash = () => {
       dataIndex: 'createdDate'
     }
   ]
-  const [selectId, setSelectId] = useState<number[]>([])
-  const { confirm } = Modal
+
+  const { loading: deleteLoading, run: deleteQuestion } = useRequest(
+    async () => await deleteQuestionServer(selectId),
+    {
+      manual: true,
+      debounceWait: 500,
+      onSuccess() {
+        setSelectId([])
+        refresh()
+        message.success('删除成功')
+
+      }
+    }
+  )
+
+  const { loading: recoverLoading, run: recover } = useRequest(
+    async () => {
+      for await (const id of selectId) {
+        await updateQuestionServer(id, { isDeleted: false })
+      }
+    },
+    {
+      manual: true,
+      debounceWait: 500,
+      onSuccess() {
+        setSelectId([])
+        message.success('恢复成功')
+        refresh()
+      }
+    }
+  )
+
+  const okdelete = () => {
+    confirm({
+      title: '是否彻底删除',
+      icon: <ExceptionOutlined />,
+      content: '删除后无法恢复',
+      okText: '删除',
+      onOk: () => {
+        deleteQuestion()
+      }
+    })
+  }
   // const [selectAny, setSelectAny] = useState<ListCardProps[]>([])
   const TableElement = (
     <>
       <div className='list'>
         <Space className='header'>
-          <Button type='primary' disabled={selectId.length === 0}>
+          <Button
+            type='primary'
+            disabled={selectId.length === 0 || recoverLoading}
+            onClick={recover}
+          >
             恢复
           </Button>
           <Button
             danger
-            disabled={selectId.length === 0}
-            onClick={() =>
-              confirm({
-                title: '是否彻底删除',
-                icon: <ExceptionOutlined />,
-                content: '删除后无法恢复',
-                okText: '删除',
-                onOk: () => {
-                  console.log(selectId)
-                }
-              })
-            }
+            disabled={selectId.length === 0 || deleteLoading}
+            onClick={okdelete}
           >
             完全删除
           </Button>
@@ -67,7 +106,7 @@ const Trash = () => {
         rowSelection={{
           type: 'checkbox',
           onChange: selectedRowKeys => {
-            setSelectId(selectedRowKeys as number[])
+            setSelectId(selectedRowKeys as string[])
             // setSelectAny(selectedRows as ListCardProps[])
           }
         }}
