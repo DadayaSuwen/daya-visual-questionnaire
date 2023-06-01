@@ -1,12 +1,13 @@
 import React, { useEffect, useMemo, useRef } from 'react'
 import ListCard from '../../components/list'
 import { useTitle, useDebounceFn, useRequest } from 'ahooks'
-import { Typography, Spin, Empty } from 'antd'
+import { Typography, Spin, Empty, message } from 'antd'
 import { useSearchParams } from 'react-router-dom'
 import { getQuestionListData } from '../../services/question'
 import { PAGE_SIZE, SEARCH_VALUE } from '../../components/type'
 import Search from '../../components/search'
 import './common.scss'
+import { SyncOutlined } from '@ant-design/icons'
 
 // import useLoadSearch from '../../hooks/useloadsearch'
 const { Title } = Typography
@@ -35,6 +36,8 @@ const ListPage = () => {
   const havaMore = total > list.length
 
   const searchValue = searchParams.get(SEARCH_VALUE) || ''
+
+  const antIcon = <SyncOutlined spin />
 
   const ref = useRef<HTMLDivElement>(null)
 
@@ -65,19 +68,20 @@ const ListPage = () => {
       const domRef = footerDom.getBoundingClientRect()
       if (domRef === null) return
       const { bottom } = domRef
-      if (bottom < document.body.clientHeight) {
+      if (bottom < window.innerHeight * 0.9 && bottom > 0) {
         load()
         setStarted(true)
+        message.success('加载成功')
       }
     },
     {
-      wait: 1000
+      wait: 800
     }
   )
 
   const isLoadMore = useMemo(() => {
     if (!started || loading) {
-      return <Spin />
+      return <Spin indicator={antIcon} />
     }
     if (!havaMore) {
       return <div>没有更多数据了</div>
@@ -85,7 +89,7 @@ const ListPage = () => {
     if (total === 0) {
       return <Empty description='暂无数据' />
     }
-    return <span>加载下一页</span>
+    return <Spin indicator={antIcon} />
   }, [loading])
 
   useEffect(() => {
@@ -116,11 +120,6 @@ const ListPage = () => {
         </div>
       </div>
       <div className='main'>
-        {loading && (
-          <div className='spin'>
-            <Spin />
-          </div>
-        )}
         {list.length > 0 &&
           list.map((item: Question) => {
             const { id, title, isPublish, isStar, count, createdDate, createdBy } = item

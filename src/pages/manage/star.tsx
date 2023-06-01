@@ -1,6 +1,7 @@
 import React from 'react'
 import ListCard from '../../components/list'
 import { useTitle } from 'ahooks'
+import { SyncOutlined } from '@ant-design/icons'
 import { Typography, Empty, Spin } from 'antd'
 import Search from '../../components/search'
 import useLoadSearch from '../../hooks/useloadsearch'
@@ -12,7 +13,7 @@ const Star = () => {
   useTitle('我的收藏')
   const { data, loading } = useLoadSearch({ isStar: true })
   const { list = [], total } = data || {}
-
+  const antIcon = <SyncOutlined spin />
   return (
     <div className='list'>
       <div className='header'>
@@ -26,7 +27,7 @@ const Star = () => {
       <div className='main'>
         {loading && (
           <div className='spin'>
-            <Spin />
+            <Spin indicator={antIcon} />
           </div>
         )}
         {!loading && list.length === 0 && <Empty description='暂无数据' />}

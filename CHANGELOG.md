@@ -1,4 +1,4 @@
-# 0.1.0 (2023-05-31)
+# 0.1.0 (2023-06-01)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -9,6 +9,7 @@
  - | 添加路由 | [907e2bd](https://github.com/dalang857/suwendemo/commit/907e2bd)
  - | 完成登录主页页面的校验 | [1b283ad](https://github.com/dalang857/suwendemo/commit/1b283ad)
  - | 完成服务端的搭建 | [edb551d](https://github.com/dalang857/suwendemo/commit/edb551d)
+ - | 完成列表不同分页功能 | [d3b629f](https://github.com/dalang857/suwendemo/commit/d3b629f)
  - | 完成搜索功能的地址切换 | [fec7a3e](https://github.com/dalang857/suwendemo/commit/fec7a3e)
  - | 完成所有列表页的界面 | [801199b](https://github.com/dalang857/suwendemo/commit/801199b)
  - | 完成页面布局和基础的搭建 | [e074803](https://github.com/dalang857/suwendemo/commit/e074803)

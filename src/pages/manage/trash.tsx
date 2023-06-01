@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { useTitle } from 'ahooks'
 import { Typography, Empty, Table, Tag, Button, Space, Modal, Spin } from 'antd'
 import ListPages from '../../components/pagination'
-import { ExceptionOutlined } from '@ant-design/icons'
+import { ExceptionOutlined, SyncOutlined } from '@ant-design/icons'
 import Search from '../../components/search'
+
 import useLoadSearch from '../../hooks/useloadsearch'
 import './common.scss'
 const { Title } = Typography
@@ -12,6 +13,7 @@ const Trash = () => {
   useTitle('回收站')
   const { data, loading } = useLoadSearch({ isDeleted: true })
   const { list = [], total } = data || {}
+  const antIcon = <SyncOutlined spin />
   const tableColumns = [
     {
       title: '问卷标题',
@@ -90,7 +92,7 @@ const Trash = () => {
       <div className='main'>
         {loading && (
           <div className='spin'>
-            <Spin />
+            <Spin indicator={antIcon} />
           </div>
         )}
         {!loading && list.length === 0 && <Empty description='暂无数据' />}
