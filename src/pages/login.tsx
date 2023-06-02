@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react'
-import { Typography, Form, Input, Space, Button, Checkbox } from 'antd'
+import { Typography, Form, Input, Space, Button, Checkbox, message } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
-import { Link } from 'react-router-dom'
-import { REGISTER_PATH } from '../pages/router/index'
+import { Link, useNavigate } from 'react-router-dom'
+import { REGISTER_PATH, MANAGE_LIST_PATH } from '../pages/router/index'
+import { loginService } from '../services/user'
+import { useRequest } from 'ahooks'
+import { setUserToken } from '../utils/user-token'
 import './login.scss'
 
 interface ILogin {
@@ -11,29 +14,42 @@ interface ILogin {
   remenber: boolean
 }
 
-const { Title } = Typography
-const USERNAME_KEY = 'loginUserName'
-const PASSWORD_KEY = 'loginPassWord'
-
-const remenberUser = (userName: string, userPassword: string) => {
-  localStorage.setItem(USERNAME_KEY, userName)
-  localStorage.setItem(PASSWORD_KEY, userPassword)
-}
-const deleteremenberUser = () => {
-  localStorage.removeItem(USERNAME_KEY)
-  localStorage.removeItem(PASSWORD_KEY)
-}
-
-const getStorage = () => {
-  return {
-    loginUserName: localStorage.getItem(USERNAME_KEY),
-    loginPassWord: localStorage.getItem(PASSWORD_KEY)
-  }
-}
-
 const Login = () => {
+  const { Title } = Typography
+  const USERNAME_KEY = 'loginUserName'
+  const PASSWORD_KEY = 'loginPassWord'
+  const navigate = useNavigate()
+
+  const { loading: loginLoading, run: login } = useRequest(async values => {
+    const { loginUserName, loginPassWord } = values
+    return await loginService(loginUserName, loginPassWord)
+
+  }, {
+    manual: true,
+    onSuccess(result) {
+      const { token = '' } = result
+      setUserToken(token)
+      message.success('登录成功')
+      navigate(MANAGE_LIST_PATH)
+    }
+  })
+
+  const remenberUser = (userName: string, userPassword: string) => {
+    localStorage.setItem(USERNAME_KEY, userName)
+    localStorage.setItem(PASSWORD_KEY, userPassword)
+  }
+  const deleteremenberUser = () => {
+    localStorage.removeItem(USERNAME_KEY)
+    localStorage.removeItem(PASSWORD_KEY)
+  }
+
+  const getStorage = () => {
+    return {
+      loginUserName: localStorage.getItem(USERNAME_KEY),
+      loginPassWord: localStorage.getItem(PASSWORD_KEY)
+    }
+  }
   const onFinish = (values: ILogin) => {
-    console.log(values)
     const { loginUserName, loginPassWord, remenber } = values
 
     if (remenber) {
@@ -41,8 +57,10 @@ const Login = () => {
     } else {
       deleteremenberUser()
     }
+    login(values)
   }
   const [form] = Form.useForm()
+
   useEffect(() => {
     const { loginUserName, loginPassWord } = getStorage()
     form.setFieldsValue({
@@ -87,7 +105,7 @@ const Login = () => {
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Space>
-              <Button type='primary' htmlType='submit'>
+              <Button type='primary' htmlType='submit' disabled={loginLoading}>
                 登录
               </Button>
               <Link to={REGISTER_PATH}>去注册</Link>

@@ -1,8 +1,17 @@
 import axios from 'axios'
-
+import { getUserToken } from '../utils/user-token'
 const instance = axios.create({
   timeout: 10 * 1000
 })
+
+// request拦截器
+instance.interceptors.request.use(
+  config => {
+    config.headers['Authorization'] = `Bearer ${getUserToken()}`
+    return config
+  },
+  error => Promise.reject(error)
+)
 
 instance.interceptors.response.use(res => {
   const resData = (res.data || {}) as ResType

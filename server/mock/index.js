@@ -1,6 +1,6 @@
 const question = require('./question')
-const tests = require('./test')
-
-const mocks = [...question, ...tests]
+const test = require('./test')
+const user = require('./user')
+const mocks = [...question, ...test, ...user]
 
 module.exports = mocks

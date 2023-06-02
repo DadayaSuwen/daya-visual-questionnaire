@@ -1,8 +1,10 @@
 import React from 'react'
-import { Typography, Form, Input, Space, Button } from 'antd'
+import { Typography, Form, Input, Space, Button, message } from 'antd'
 import { UserAddOutlined } from '@ant-design/icons'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { LOGIN_PATH } from '../pages/router/index'
+import { registerService } from '../services/user'
+import { useRequest } from 'ahooks'
 import './register.scss'
 
 interface IRegister {
@@ -12,8 +14,21 @@ interface IRegister {
 
 const { Title } = Typography
 const Register = () => {
+  const navigate = useNavigate()
+  const { loading: registerLoading, run: register } = useRequest(async values => {
+    const { registerUsername, registerPassword } = values
+    await registerService(registerUsername, registerPassword)
+
+  }, {
+    manual: true,
+    onSuccess() {
+      message.success('注册成功')
+      navigate(LOGIN_PATH)
+    }
+  })
+  // 注册事件
   const onFinish = (values: IRegister) => {
-    console.log(values)
+    register(values)
   }
   return (
     <div className='register-form'>
@@ -80,7 +95,7 @@ const Register = () => {
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Space>
-              <Button type='primary' htmlType='submit'>
+              <Button type='primary' htmlType='submit' disabled={registerLoading}>
                 注册
               </Button>
               <Link to={LOGIN_PATH}>去登陆</Link>

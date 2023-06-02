@@ -1,10 +1,11 @@
-# 0.1.0 (2023-06-01)
+# 0.1.0 (2023-06-02)
 
 ### 🌟 新功能
 范围|描述|commitId
 --|--|--
  - | 代码构建 | [7bc416d](https://github.com/dalang857/suwendemo/commit/7bc416d)
  - | 使用useRequset重构请求 | [ccecf46](https://github.com/dalang857/suwendemo/commit/ccecf46)
+ - | 添加复制 标星 删除 恢复等等细微功能 | [faaedf5](https://github.com/dalang857/suwendemo/commit/faaedf5)
  - | 添加基础页面 | [91c5dcd](https://github.com/dalang857/suwendemo/commit/91c5dcd)
  - | 添加路由 | [907e2bd](https://github.com/dalang857/suwendemo/commit/907e2bd)
  - | 完成登录主页页面的校验 | [1b283ad](https://github.com/dalang857/suwendemo/commit/1b283ad)

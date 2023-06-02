@@ -15,10 +15,14 @@ async function getRes(fn, ctx) {
 
 mockslist.forEach(item => {
   const { url, method, response } = item
-  router[method](url, async ctx => {
-    const res = await getRes(response, ctx)
-    ctx.body = res
-  })
+  if (typeof router[method] === 'function') {
+    router[method](url, async ctx => {
+      const res = await getRes(response, ctx)
+      ctx.body = res
+    })
+  } else {
+    console.error(`Invalid method: ${method}`)
+  }
 })
 
 app.use(router.routes())
