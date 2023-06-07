@@ -1,4 +1,4 @@
-# 0.1.0 (2023-06-02)
+# 0.1.0 (2023-06-07)
 
 ### 🌟 新功能
 范围|描述|commitId
@@ -8,6 +8,7 @@
  - | 添加复制 标星 删除 恢复等等细微功能 | [faaedf5](https://github.com/dalang857/suwendemo/commit/faaedf5)
  - | 添加基础页面 | [91c5dcd](https://github.com/dalang857/suwendemo/commit/91c5dcd)
  - | 添加路由 | [907e2bd](https://github.com/dalang857/suwendemo/commit/907e2bd)
+ - | 完成代码 | [924597e](https://github.com/dalang857/suwendemo/commit/924597e)
  - | 完成登录主页页面的校验 | [1b283ad](https://github.com/dalang857/suwendemo/commit/1b283ad)
  - | 完成服务端的搭建 | [edb551d](https://github.com/dalang857/suwendemo/commit/edb551d)
  - | 完成列表不同分页功能 | [d3b629f](https://github.com/dalang857/suwendemo/commit/d3b629f)
@@ -38,6 +39,7 @@
  - | 完善页面的基础显示 | [c1dd5b9](https://github.com/dalang857/suwendemo/commit/c1dd5b9)
  - | 修改测试 | [21834c6](https://github.com/dalang857/suwendemo/commit/21834c6)
  - | 修改启动方法yarn | [39b6aeb](https://github.com/dalang857/suwendemo/commit/39b6aeb)
+ - | 修改mackdown | [bce9d25](https://github.com/dalang857/suwendemo/commit/bce9d25)
  - | 修改md | [99156c3](https://github.com/dalang857/suwendemo/commit/99156c3)
  - | 优化package.json | [5ac45b1](https://github.com/dalang857/suwendemo/commit/5ac45b1)
 

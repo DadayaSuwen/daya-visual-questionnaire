@@ -11,8 +11,10 @@ import './common.scss'
 const { Title } = Typography
 const Star = () => {
   useTitle('我的收藏')
+
   const { data, loading } = useLoadSearch({ isStar: true })
   const { list = [], total } = data || {}
+
   const antIcon = <SyncOutlined spin />
   return (
     <div className='list'>

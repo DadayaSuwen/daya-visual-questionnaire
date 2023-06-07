@@ -1,11 +1,14 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import { Layout } from 'antd'
+import { Layout, Spin } from 'antd'
 import Logo from '../../components/logo'
 import User from '../../components/user'
 import './main-layout.scss'
+import useLoadUserData from '../../hooks/useloaduserdata'
 const MainLayout = () => {
   const { Header, Content, Footer } = Layout
+  const { waitingUserData } = useLoadUserData()
+
   return (
     <Layout>
       <Header className='layout-herder'>
@@ -17,7 +20,7 @@ const MainLayout = () => {
         </div>
       </Header>
       <Content className='layout-container'>
-        <Outlet />
+        {waitingUserData ? <div className='layou-spin'><Spin /></div> : <Outlet />}
       </Content>
       <Footer className='layout-footer'>footer</Footer>
     </Layout>

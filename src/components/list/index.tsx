@@ -75,7 +75,7 @@ export default function ListCard(props: ListCardProps) {
         <div className='left'>
           <Link to={isPublish ? `/question/stat/${id}` : `/question/edit/${id}`}>
             <Space>
-              {isStar && <StarOutlined className='is-star' />}
+              {isStarState && <StarOutlined className='is-star' />}
               {title}
             </Space>
           </Link>

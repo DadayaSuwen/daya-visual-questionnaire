@@ -9,6 +9,11 @@
 }
 .layout-container {
   min-height: calc(100vh - 64px - 71px);
+  .layou-spin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 .layout-footer {
   text-align: center;
