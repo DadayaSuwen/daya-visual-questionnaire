@@ -11,7 +11,7 @@
     "c:install": "cd client && yarn",
     "s:install": "cd server && yarn",
     "c": "cd client && npm run s",
-    "s": "cd server && npm run s",
+    "s": "cd server && npm run dev",
     "i": "npm run c:install && npm run s:install",
     "build": "craco build",
     "test": "craco test"

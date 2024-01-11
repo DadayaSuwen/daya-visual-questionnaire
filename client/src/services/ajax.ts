@@ -7,6 +7,9 @@ const instance = axios.create({
 // request拦截器
 instance.interceptors.request.use(
   config => {
+    if (config.url && config.url.startsWith('/api')) {
+      config.baseURL = 'http://127.0.0.1:7001'
+    }
     config.headers['Authorization'] = `Bearer ${getUserToken()}`
     return config
   },
