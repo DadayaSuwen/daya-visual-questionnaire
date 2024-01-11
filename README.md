@@ -17,3 +17,11 @@
 使用淘宝镜像源安装项目依赖
 
 ` npm config set registry https://registry.npmmirror.com/`
+
+### 页面展示
+
+![首页](./image/首页.png)
+
+![登录页面](./image/登录.png)
+
+![列表](./image/列表.png)
