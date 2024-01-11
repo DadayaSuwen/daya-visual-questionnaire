@@ -7,7 +7,7 @@ import { ExceptionOutlined, SyncOutlined } from '@ant-design/icons'
 import Search from '../../components/search'
 import { updateQuestionServer } from '../../services/question'
 import { deleteQuestionServer } from '../../services/question'
-import useLoadSearch from '../../hooks/useloadsearch'
+import useLoadSearch from '../../hooks/use-load-search'
 import './common.scss'
 const { Title } = Typography
 
@@ -48,7 +48,6 @@ const Trash = () => {
         setSelectId([])
         refresh()
         message.success('删除成功')
-
       }
     }
   )
@@ -93,11 +92,7 @@ const Trash = () => {
           >
             恢复
           </Button>
-          <Button
-            danger
-            disabled={selectId.length === 0 || deleteLoading}
-            onClick={okdelete}
-          >
+          <Button danger disabled={selectId.length === 0 || deleteLoading} onClick={okdelete}>
             完全删除
           </Button>
         </Space>

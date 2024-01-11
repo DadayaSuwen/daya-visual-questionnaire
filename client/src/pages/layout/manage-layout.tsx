@@ -9,19 +9,7 @@ const ManageLayout = () => {
   const Navigate = useNavigate()
   const { pathname } = useLocation()
 
-  // const [loading, setLoding] = useState(false)
-
-  // const handleCreate = async () => {
-  //   setLoding(true)
-  //   const data = await createQuestionServer()
-  //   const { id } = data
-  //   if (id) {
-  //     Navigate(`/question/edit/${id}`)
-  //     message.success('创建成功')
-  //   }
-  //   setLoding(false)
-  // }
-  const { loading, run: handleCrunreate } = useRequest(createQuestionServer, {
+  const { loading, run: handleCreate } = useRequest(createQuestionServer, {
     manual: true,
     onSuccess(result) {
       Navigate(`/question/edit/${result.id}`)
@@ -34,7 +22,7 @@ const ManageLayout = () => {
       <div className='left'>
         <Space direction='vertical'>
           <Button
-            onClick={handleCrunreate}
+            onClick={handleCreate}
             icon={<PlusOutlined />}
             type='primary'
             size='large'

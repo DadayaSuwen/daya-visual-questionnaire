@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 // import { getUserInfoService } from '../../services/user'
 import './index.scss'
-import useGetInfo from '../../hooks/usegetinfo'
+import useGetInfo from '../../hooks/use-get-info'
 import { logoutReducer } from '../../store/user'
 
 const User = () => {
@@ -26,12 +26,17 @@ const User = () => {
         <UserOutlined />
         昵称：{username}
       </span>
-      <Button type='link' onClick={() => {
-        dispatch(logoutReducer())
-        removeUserToken()
-        message.success(username)
-        navigate(LOGIN_PATH)
-      }}>登出</Button>
+      <Button
+        type='link'
+        onClick={() => {
+          dispatch(logoutReducer())
+          removeUserToken()
+          message.success(username)
+          navigate(LOGIN_PATH)
+        }}
+      >
+        登出
+      </Button>
     </>
   )
   const Login = (
@@ -40,10 +45,6 @@ const User = () => {
       登录
     </Link>
   )
-  return (
-    <>
-      {username ? UserInfo : Login}
-    </>
-  )
+  return <>{username ? UserInfo : Login}</>
 }
 export default User

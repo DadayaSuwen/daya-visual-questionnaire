@@ -4,7 +4,7 @@ import { Layout, Spin } from 'antd'
 import Logo from '../../components/logo'
 import User from '../../components/user'
 import './main-layout.scss'
-import useLoadUserData from '../../hooks/useloaduserdata'
+import useLoadUserData from '../../hooks/use-load-user-data'
 const MainLayout = () => {
   const { Header, Content, Footer } = Layout
   const { waitingUserData } = useLoadUserData()
@@ -20,7 +20,13 @@ const MainLayout = () => {
         </div>
       </Header>
       <Content className='layout-container'>
-        {waitingUserData ? <div className='layou-spin'><Spin /></div> : <Outlet />}
+        {waitingUserData ? (
+          <div className='layou-spin'>
+            <Spin />
+          </div>
+        ) : (
+          <Outlet />
+        )}
       </Content>
       <Footer className='layout-footer'>footer</Footer>
     </Layout>

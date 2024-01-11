@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Space, Typography } from 'antd'
 import { FormOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
-import useGetInfo from '../../hooks/usegetinfo'
+import useGetInfo from '../../hooks/use-get-info'
 import './index.scss'
 import { HOME_PATH, MANAGE_LIST_PATH } from '../../pages/router/index'
 

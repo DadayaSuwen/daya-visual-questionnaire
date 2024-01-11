@@ -4,7 +4,7 @@ import { useTitle } from 'ahooks'
 import { SyncOutlined } from '@ant-design/icons'
 import { Typography, Empty, Spin } from 'antd'
 import Search from '../../components/search'
-import useLoadSearch from '../../hooks/useloadsearch'
+import useLoadSearch from '../../hooks/use-load-search'
 import ListPages from '../../components/pagination'
 import './common.scss'
 

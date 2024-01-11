@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import useGetInfo from './usegetinfo'
+import useGetInfo from './use-get-info'
 import { useRequest } from 'ahooks'
 import { getUserInfoService } from '../services/user'
 import { useDispatch } from 'react-redux'
