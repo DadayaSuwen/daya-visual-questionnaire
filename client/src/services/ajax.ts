@@ -1,38 +1,59 @@
 import axios from 'axios'
 import { getUserToken } from '../utils/user-token'
+
+const baseURL = 'http://127.0.0.1:7001'
+const timeout = 10 * 1000
+
 const instance = axios.create({
-  timeout: 10 * 1000
+  baseURL,
+  timeout
 })
 
-// request拦截器
+// request interceptor
 instance.interceptors.request.use(
   config => {
-    if (config.url && config.url.startsWith('/api')) {
-      config.baseURL = 'http://127.0.0.1:7001'
-    }
     config.headers['Authorization'] = `Bearer ${getUserToken()}`
     return config
   },
   error => Promise.reject(error)
 )
 
-instance.interceptors.response.use(res => {
-  const resData = (res.data || {}) as ResType
-  const { errno, data, msg } = resData
-  if (errno !== 0) {
-    if (msg) console.error(msg)
+// response interceptor
+instance.interceptors.response.use(
+  res => {
+    const resData = res.data as ResType
+    const { success, data, message } = resData
 
-    throw new Error(msg || '请求失败')
+    if (!success) {
+      console.error(message)
+      throw new Error(message || '请求失败')
+    }
+
+    return data
+  },
+  error => {
+    if (error.response) {
+      // 请求已发出，服务器以状态代码响应
+      // 超出 2xx 范围
+      console.error(`Error response: ${error.response.status}`)
+    } else if (error.request) {
+      // 已发出请求但未收到回复
+      console.error('Error request: No response received')
+    } else {
+      // 设置请求时发生了一些事情，触发了错误
+      console.error('Error', error.message)
+    }
+
+    return Promise.reject(error)
   }
-
-  return data
-})
+)
 
 export default instance
 
 export type ResType = {
-  errno: number
-  msg?: string
+  code: number
+  success: boolean
+  message?: string
   data?: any
 }
 

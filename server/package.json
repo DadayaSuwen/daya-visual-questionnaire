@@ -13,6 +13,7 @@
     "@midwayjs/logger": "^3.1.0",
     "@midwayjs/sequelize": "3",
     "@midwayjs/validate": "^3.12.0",
+    "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.7.0",
     "sequelize": "^6.35.2",
     "sequelize-typescript": "^2.1.6"
@@ -21,6 +22,7 @@
     "@midwayjs/cli": "^2.0.0",
     "@midwayjs/mock": "^3.12.0",
     "@types/jest": "^29.2.0",
+    "@types/jsonwebtoken": "^9.0.5",
     "@types/koa": "^2.13.4",
     "@types/node": "14",
     "cross-env": "^6.0.0",

@@ -21,7 +21,7 @@ const MainLayout = () => {
       </Header>
       <Content className='layout-container'>
         {waitingUserData ? (
-          <div className='layou-spin'>
+          <div className='layout-spin'>
             <Spin />
           </div>
         ) : (

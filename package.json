@@ -5,6 +5,7 @@
   "dependencies": {
     "@craco/craco": "^7.1.0",
     "@typescript-eslint/parser": "^6.18.1",
+    "bcryptjs": "^2.4.3",
     "typescript": "^5.3.3"
   },
   "scripts": {

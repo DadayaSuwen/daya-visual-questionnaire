@@ -16,16 +16,18 @@ const { Title } = Typography
 const Register = () => {
   const navigate = useNavigate()
   const { loading: registerLoading, run: register } = useRequest(async values => {
-    const { registerUsername, registerPassword } = values
-    await registerService(registerUsername, registerPassword)
-
+    const { registerUsername, registerPassword } = values;
+    await registerService(registerUsername, registerPassword);
   }, {
     manual: true,
     onSuccess() {
-      message.success('注册成功')
-      navigate(LOGIN_PATH)
+      message.success('注册成功');
+      navigate(LOGIN_PATH);
+    },
+    onError(error) {
+      message.error('error: ' + error.message);
     }
-  })
+  });
   // 注册事件
   const onFinish = (values: IRegister) => {
     register(values)
